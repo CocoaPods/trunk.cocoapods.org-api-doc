@@ -1,0 +1,18 @@
+FORMAT: 1A
+HOST: http://trunk.cocoapods.org/api/v1
+
+# cocoapods
+Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+
+# Group Sessions
+Notes related resources of the **Notes API**
+
+## Session Collection [/sessions]
+### Create a Session [POST]
++ Request (application/json)
+
+        { "email": "kyle@cocoapods.org", "name": "Kyle Fuller" }
+
++ Response 201 (application/json)
+
+        { "email": "kyle@cocoapods.org", "name": "Kyle Fuller", "token": "dsfsfdg" }
