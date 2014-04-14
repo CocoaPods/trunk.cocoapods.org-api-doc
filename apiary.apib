@@ -5,14 +5,97 @@ HOST: http://trunk.cocoapods.org/api/v1
 Notes API is a *short texts saving* service similar to its physical paper presence on your table.
 
 # Group Sessions
-Notes related resources of the **Notes API**
+API for managing sessions.
 
 ## Session Collection [/sessions]
+
+### Get your current Session [GET]
+
++ Request
+
+    + Headers
+    
+            Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
+
+
++ Response 200 (application/json)
+
+        { "email": "kyle@cocoapods.org", "name": "Kyle Fuller", "token": "527d11fe429f3426cb8dbeba183a0d80" }
+
 ### Create a Session [POST]
+
 + Request (application/json)
 
         { "email": "kyle@cocoapods.org", "name": "Kyle Fuller" }
 
 + Response 201 (application/json)
 
-        { "email": "kyle@cocoapods.org", "name": "Kyle Fuller", "token": "dsfsfdg" }
+        { "email": "kyle@cocoapods.org", "name": "Kyle Fuller", "token": "527d11fe429f3426cb8dbeba183a0d80" }
+
+### Deletes your current Session [DELETE]
+
++ Request
+
+    + Headers
+    
+            Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
+
+
++ Response 201
+
+# Group Pods
+API for managing pods.
+
+## POST /pods
+
++ Request (application/json)
+
+        {}
+
+
++ Response 201 (application/json)
+
+        {}
+        
+## GET /pods/{name}
+
++ Response 200 (application/json)
+
+        {
+          "versions": [
+            {
+              "created_at": "2014-04-13 23:04:37 +0000",
+              "name": "1.0.0"
+            }
+          ],
+          "owners": [
+            {
+              "created_at": "2014-04-13 22:49:56 +0000",
+              "email": "inbox@kylefuller.co.uk",
+              "name": "Kyle Fuller"
+            }
+          ]
+        }
+        
+## GET /pods/{name}/versions/{version}
+
++ Response 200 (application/json)
+
+        {
+          "messages": [
+            {
+              "2014-04-13 23:04:37 +0000": "Version `NSAttributedString+CCLFormat 1.0.0' created via Github hook."
+            }
+          ],
+          "data_url": "https:\/\/raw.github.com\/CocoaPods\/Specs\/6d2c71e76855ed066fe48db6ae3bee9bbf5972ba\/Specs\/NSAttributedString+CCLFormat\/1.0.0\/NSAttributedString+CCLFormat.podspec.json"
+        }
+        
+## PATCH /pods/{name}/owners
+
++ Request (application/json)
+
+        {}
+
++ Response 200 (application/json)
+
+        {}
