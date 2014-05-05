@@ -73,13 +73,117 @@ API for managing pods.
 
 + Request (application/json)
 
-        {}
+        {
+            "name": "KFData",
+            "version": "1.0.2",
+            "license": "BSD",
+            "summary": "Lightweight Core Data wrapper.",
+            "homepage": "https://github.com/kylef/KFData",
+            "authors": {
+                "Kyle Fuller": "inbox@kylefuller.co.uk"
+            },
+            "social_media_url": "https://twitter.com/kylefuller",
+            "source": {
+                "git": "https://github.com/kylef/KFData.git",
+                "tag": "1.0.2"
+            },
+            "requires_arc": true,
+            "platforms": {
+                "osx": "10.7",
+                "ios": "5.0"
+            },
+            "default_subspec": "Essentials",
+            "header_dir": "KFData",
+            "subspecs": [{
+                "name": "Attribute",
+                "ios": {
+                    "source_files": "KFData/Attribute/*.{h,m}"
+                },
+                "osx": {
+                    "source_files": "KFData/Attribute/*.{h,m}"
+                }
+            }, {
+                "name": "Manager",
+                "ios": {
+                    "source_files": "KFData/Manager/*.{h,m}"
+                },
+                "osx": {
+                    "source_files": "KFData/Manager/*.{h,m}"
+                }
+            }, {
+                "name": "Core",
+                "ios": {
+                    "frameworks": "CoreData",
+                    "source_files": ["KFData/KFData.h", "KFData/Core/*.{h,m}"]
+                },
+                "osx": {
+                    "frameworks": "CoreData",
+                    "source_files": "KFData/Core/*.{h,m}"
+                }
+            }, {
+                "name": "Store",
+                "ios": {
+                    "frameworks": "CoreData",
+                    "source_files": "KFData/Store/*.{h,m}",
+                    "public_header_files": "KFData/Store/KFDataStore.h",
+                    "private_header_files": "KFData/Store/KFDataStoreInternal.h"
+                },
+                "osx": {
+                    "frameworks": "CoreData",
+                    "source_files": "KFData/Store/*.{h,m}",
+                    "public_header_files": "KFData/Store/KFDataStore.h",
+                    "private_header_files": "KFData/Store/KFDataStoreInternal.h"
+                }
+            }, {
+                "name": "UI",
+                "dependencies": {
+                    "KFData/Essentials": []
+                },
+                "platforms": {
+                    "ios": null
+                },
+                "ios": {
+                    "frameworks": "UIKit",
+                    "source_files": "KFData/UI/*.{h,m}"
+                }
+            }, {
+                "name": "Essentials",
+                "dependencies": {
+                    "KFData/Core": [],
+                    "KFData/Store": [],
+                    "KFData/Attribute": [],
+                    "KFData/Manager": []
+                },
+                "ios": {
+                    "dependencies": {
+                        "KFData/UI": []
+                    }
+                }
+            }, {
+                "name": "Compatibility",
+                "dependencies": {
+                    "KFData/Core": [],
+                    "KFData/Manager": []
+                },
+                "header_dir": "KFData/Compatibility",
+                "source_files": "KFData/Compatibility/*.{h,m}"
+            }]
+        }
 
++ Response 302
 
-+ Response 201 (application/json)
+    + Headers
 
-        {}
-        
+            Location: https://trunk.cocoapods.org/api/v1/pods/KFData/versions/1.0.2
+
++ Response 403 (application/json)
+
+        { "error": "You are not allowed to push new versions for this pod." }
+
++ Response 503 (application/json)
+
+        { "error": "Push access is currently disabled." }
+
 ## GET /pods/{name}
 
 + Response 200 (application/json)
@@ -105,14 +209,14 @@ API for managing pods.
 + Response 200 (application/json)
 
         {
-          "messages": [
-            {
-              "2014-04-13 23:04:37 +0000": "Version `NSAttributedString+CCLFormat 1.0.0' created via Github hook."
-            }
-          ],
-          "data_url": "https:\/\/raw.github.com\/CocoaPods\/Specs\/6d2c71e76855ed066fe48db6ae3bee9bbf5972ba\/Specs\/NSAttributedString+CCLFormat\/1.0.0\/NSAttributedString+CCLFormat.podspec.json"
+            "messages": [{
+                "2014-05-05 20:50:42 +0200": "Push for `KFData 1.0.2' initiated."
+            }, {
+                "2014-05-05 20:50:42 +0200": "Push for `KFData 1.0.2' has been pushed (0.000307 s)."
+            }],
+            "data_url": "https://raw.githubusercontent.com/CocoaPods/Specs/355a6a1e6065b4a939e688b0bc42d2a74dc4fcf7/Specs/KFData/1.0.2/KFData.podspec.json"
         }
-        
+
 ## PATCH /pods/{name}/owners
 
 + Request (application/json)
