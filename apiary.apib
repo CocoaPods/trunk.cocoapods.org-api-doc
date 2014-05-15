@@ -60,7 +60,7 @@ API for managing sessions.
 + Request
 
     + Headers
-    
+
             Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
 
 
@@ -72,6 +72,10 @@ API for managing pods.
 ## POST /pods
 
 + Request (application/json)
+
+    + Headers
+
+            Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
 
         {
             "name": "KFData",
@@ -221,8 +225,21 @@ API for managing pods.
 
 + Request (application/json)
 
-        {}
+    + Headers
+
+            Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
+
+        { "email": "eloy.de.enige@gmail.com" }
 
 + Response 200 (application/json)
 
-        {}
+        [{
+            "created_at": "2014-04-13 22:49:56 +0000",
+            "email": "inbox@kylefuller.co.uk",
+            "name": "Kyle Fuller"
+        }, {
+            "created_at": "2014-04-01 00:00:00 +0000",
+            "email": "eloy.de.enige@gmail.com",
+            "name": "Eloy Durán"
+        }]
+
