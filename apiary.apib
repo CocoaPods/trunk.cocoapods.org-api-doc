@@ -9,6 +9,27 @@ API for managing sessions.
 
 ## Session Collection [/sessions]
 
+### Create a Session [POST]
+
++ Request (application/json)
+
+        { "email": "kyle@cocoapods.org" }
+
+        { "email": "kyle@cocoapods.org", "name": "Kyle Fuller" }
+
+        { "email": "kyle@cocoapods.org", "name": "Kyle Fuller", "description": "Office Mac" }
+
++ Response 201 (application/json)
+
+        {
+          "created_at": "2014-05-04 15:20:19 +0200",
+          "token": "527d11fe429f3426cb8dbeba183a0d80",
+          "valid_until": "2014-09-09 15:20:19 +0200",
+          "verified": false,
+          "created_from_ip": "1.2.3.4",
+          "description": "Office Mac"
+        }
+
 ### Get your current Session [GET]
 
 + Request
@@ -39,21 +60,6 @@ API for managing sessions.
 + Response 401 (application/json)
 
         { "error": "Authentication token is invalid or unverified." }
-
-### Create a Session [POST]
-
-+ Request (application/json)
-
-        { "email": "kyle@cocoapods.org", "name": "Kyle Fuller" }
-
-+ Response 201 (application/json)
-
-        {
-          "created_at": "2014-05-04 15:20:19 +0200",
-          "token": "527d11fe429f3426cb8dbeba183a0d80",
-          "valid_until": "2014-09-09 15:20:19 +0200",
-          "verified": false
-        }
 
 ### Deletes your current Session [DELETE]
 
