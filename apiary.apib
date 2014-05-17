@@ -30,7 +30,7 @@ API for managing sessions.
           "description": "Office Mac"
         }
 
-### Get your current Session [GET]
+### GET /sessions
 
 + Request
 
@@ -61,7 +61,7 @@ API for managing sessions.
 
         { "error": "Authentication token is invalid or unverified." }
 
-### Deletes your current Session [DELETE]
+### DELETE /sessions
 
 + Request
 
@@ -69,6 +69,15 @@ API for managing sessions.
 
             Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
 
++ Response 201
+
+### DELETE /sessions/all
+
++ Request
+
+    + Headers
+
+            Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
 
 + Response 201
 
