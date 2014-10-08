@@ -1,10 +1,12 @@
 FORMAT: 1A
 HOST: http://trunk.cocoapods.org/api/v1
 
-# cocoapods
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+# trunk.cocoapods.org
+
+API documentation for CocoaPods Trunk.
 
 # Group Sessions
+
 API for managing sessions.
 
 ## Session Collection [/sessions]
@@ -30,12 +32,12 @@ API for managing sessions.
           "description": "Office Mac"
         }
 
-### GET /sessions
+### Retrieve Sessions [GET]
 
 + Request
 
     + Headers
-    
+
             Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
 
 
@@ -45,23 +47,25 @@ API for managing sessions.
           "created_at": "2014-04-21 23:08:00 +0200",
           "email": "kyle@cocoapods.org",
           "name": "Kyle Fuller",
-          "sessions": [{
+          "sessions": [
+            {
               "created_at": "2014-05-04 15:20:19 +0200",
               "valid_until": "2014-09-09 15:20:19 +0200",
               "verified": false
-          },
-          {
+            },
+            {
               "created_at": "2014-05-04 15:20:20 +0200",
               "valid_until": "2014-09-09 15:20:20 +0200",
               "verified": true
-          }]
+            }
+          ]
         }
 
 + Response 401 (application/json)
 
         { "error": "Authentication token is invalid or unverified." }
 
-### DELETE /sessions
+### Delete a session [DELETE]
 
 + Request
 
@@ -82,6 +86,7 @@ API for managing sessions.
 + Response 201
 
 # Group Pods
+
 API for managing pods.
 
 ## POST /pods
@@ -92,108 +97,31 @@ API for managing pods.
 
             Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
 
-        {
-            "name": "KFData",
-            "version": "1.0.2",
-            "license": "BSD",
-            "summary": "Lightweight Core Data wrapper.",
-            "homepage": "https://github.com/kylef/KFData",
-            "authors": {
+    + Body
+
+            {
+              "name": "QueryKit",
+              "version": "0.8.3",
+              "authors": {
                 "Kyle Fuller": "inbox@kylefuller.co.uk"
-            },
-            "social_media_url": "https://twitter.com/kylefuller",
-            "source": {
-                "git": "https://github.com/kylef/KFData.git",
-                "tag": "1.0.2"
-            },
-            "requires_arc": true,
-            "platforms": {
-                "osx": "10.7",
-                "ios": "5.0"
-            },
-            "default_subspec": "Essentials",
-            "header_dir": "KFData",
-            "subspecs": [{
-                "name": "Attribute",
-                "ios": {
-                    "source_files": "KFData/Attribute/*.{h,m}"
-                },
-                "osx": {
-                    "source_files": "KFData/Attribute/*.{h,m}"
-                }
-            }, {
-                "name": "Manager",
-                "ios": {
-                    "source_files": "KFData/Manager/*.{h,m}"
-                },
-                "osx": {
-                    "source_files": "KFData/Manager/*.{h,m}"
-                }
-            }, {
-                "name": "Core",
-                "ios": {
-                    "frameworks": "CoreData",
-                    "source_files": ["KFData/KFData.h", "KFData/Core/*.{h,m}"]
-                },
-                "osx": {
-                    "frameworks": "CoreData",
-                    "source_files": "KFData/Core/*.{h,m}"
-                }
-            }, {
-                "name": "Store",
-                "ios": {
-                    "frameworks": "CoreData",
-                    "source_files": "KFData/Store/*.{h,m}",
-                    "public_header_files": "KFData/Store/KFDataStore.h",
-                    "private_header_files": "KFData/Store/KFDataStoreInternal.h"
-                },
-                "osx": {
-                    "frameworks": "CoreData",
-                    "source_files": "KFData/Store/*.{h,m}",
-                    "public_header_files": "KFData/Store/KFDataStore.h",
-                    "private_header_files": "KFData/Store/KFDataStoreInternal.h"
-                }
-            }, {
-                "name": "UI",
-                "dependencies": {
-                    "KFData/Essentials": []
-                },
-                "platforms": {
-                    "ios": null
-                },
-                "ios": {
-                    "frameworks": "UIKit",
-                    "source_files": "KFData/UI/*.{h,m}"
-                }
-            }, {
-                "name": "Essentials",
-                "dependencies": {
-                    "KFData/Core": [],
-                    "KFData/Store": [],
-                    "KFData/Attribute": [],
-                    "KFData/Manager": []
-                },
-                "ios": {
-                    "dependencies": {
-                        "KFData/UI": []
-                    }
-                }
-            }, {
-                "name": "Compatibility",
-                "dependencies": {
-                    "KFData/Core": [],
-                    "KFData/Manager": []
-                },
-                "header_dir": "KFData/Compatibility",
-                "source_files": "KFData/Compatibility/*.{h,m}"
-            }]
-        }
+              },
+              "social_media_url": "http://twitter.com/kylefuller",
+              "source": {
+                "git": "https://github.com/QueryKit/QueryKit.git",
+                "tag": "0.8.3"
+              },
+              "source_files": [
+                "QueryKit/*.{h}",
+                "QueryKit/ObjectiveC/*.{h,m}"
+              ],
+              "requires_arc": true
+            }
 
 + Response 302
 
     + Headers
 
-            Location: https://trunk.cocoapods.org/api/v1/pods/KFData/versions/1.0.2
+            Location: https://trunk.cocoapods.org/api/v1/pods/QueryKit/versions/0.8.3
 
 + Response 403 (application/json)
 
@@ -222,7 +150,7 @@ API for managing pods.
             }
           ]
         }
-        
+
 ## GET /pods/{name}/versions/{version}
 
 + Response 200 (application/json)
@@ -244,17 +172,21 @@ API for managing pods.
 
             Authorization: Token 527d11fe429f3426cb8dbeba183a0d80
 
-        { "email": "eloy.de.enige@gmail.com" }
+    + Body
+
+            { "email": "eloy.de.enige@gmail.com" }
 
 + Response 200 (application/json)
 
-        [{
+        [
+          {
             "created_at": "2014-04-13 22:49:56 +0000",
             "email": "inbox@kylefuller.co.uk",
             "name": "Kyle Fuller"
-        }, {
+          }, {
             "created_at": "2014-04-01 00:00:00 +0000",
             "email": "eloy.de.enige@gmail.com",
             "name": "Eloy Durán"
-        }]
+          }
+        ]
 
